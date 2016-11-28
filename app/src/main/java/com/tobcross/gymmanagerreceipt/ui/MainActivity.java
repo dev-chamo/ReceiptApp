@@ -222,26 +222,63 @@ public class MainActivity extends BaseActivity {
     }
     */
 
+    public static Bitmap cropCenterBitmap(Bitmap src, int w, int h) {
+        if (src == null)
+            return null;
+
+        int width = src.getWidth();
+        int height = src.getHeight();
+
+        if (width < w && height < h)
+            return src;
+
+        int x = 0;
+        int y = 0;
+
+        if (width > w)
+            x = (width - w) / 2;
+
+        if (height > h)
+            y = (height - h) / 2;
+
+        int cw = w; // crop width
+        int ch = h; // crop height
+
+        if (w > width)
+            cw = width;
+
+        if (h > height)
+            ch = height;
+
+        return Bitmap.createBitmap(src, x, y, cw, ch);
+    }
+
     private void postReceiptContent(String receiverPhoneNumber) {
         String centerName = getPreference().getString(Constans.CENTER_NAME, "");
         String centerPhoneNumber = getPreference().getString(Constans.CENTER_PHONE_NUMBER, "");
 
         Bitmap bitmap = BitmapFactory.decodeFile(mReceiptImageUri.getPath());
 
-        int factor = bitmap.getWidth() / 360;
+        int width = 510;
+        int height = 808;
 
-        int width = 360;
-        int height = bitmap.getHeight() / factor;
-
-        Bitmap resized = null;
-        if(height > width){
+        Bitmap resized;
+        if (height > width) {
             resized = Bitmap.createScaledBitmap(bitmap, width, height, true);
         } else {
             resized = Bitmap.createScaledBitmap(bitmap, height, width, true);
         }
+        bitmap = null;
+
+        Bitmap _bitmap = Bitmap.createBitmap(resized,
+                0,
+                40,
+                resized.getWidth(),
+                (int) (resized.getHeight() * 0.75));
+        resized = null;
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        resized.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        _bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         byte[] data = outputStream.toByteArray();
 
         String receiptContent = Base64.encodeToString(data, Base64.DEFAULT);
