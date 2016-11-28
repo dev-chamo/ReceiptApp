@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.tobcross.myapplication.MainActivity">
+    <item
+        android:id="@+id/action_modify_center_register"
+        android:orderInCategory="100"
+        android:title="@string/modify_center_register_info"
+        app:showAsAction="never" />
+</menu>

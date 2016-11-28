@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="line_width">1dp</dimen>
+    <dimen name="line_height">1dp</dimen>
+
+
+    <dimen name="large_item_margin">24dp</dimen>
+    <dimen name="normal_item_margin">16dp</dimen>
+    <dimen name="small_item_margin">10dp</dimen>
+
+    <dimen name="spinner_height">36dp</dimen>
+    <dimen name="default_item_height">56dp</dimen>
+
+    <dimen name="large_text_size">22sp</dimen>
+    <dimen name="normal_text_size">20sp</dimen>
+    <dimen name="samll_text_size">18sp</dimen>
+    <dimen name="very_samll_text_size">10sp</dimen>
+
+
+    <dimen name="default_label_witdh">100dp</dimen>
+</resources>
