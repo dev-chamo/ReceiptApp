@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GYMMANAGER 영수증</string>
+    <string name="app_name">짐매니저 영수증</string>
     <string name="ok">확인</string>
     <string name="register">등록</string>
     <string name="modify">수정</string>
@@ -8,7 +8,7 @@
     <string name="mobile_phone_number">휴대전화</string>
     <string name="dash">-</string>
     <string name="settings">설정</string>
-    <string name="send_receipt_via_sms">영수증 SMS 전송</string>
+    <string name="send_receipt_via_sms">영수증 전송</string>
     <string name="issued_receipt">발행 영수증</string>
     <string name="no_issued_receipt">발행된 영수증이 없습니다.</string>
 
@@ -31,7 +31,7 @@
     <string name="center_name_hint">센터명을 입력해주세요.</string>
     <string name="wrong_center_name">센터명을 입력해주세요.</string>
     <string name="center_phone_number">센터 연락처</string>
-    <string name="wrong_phone_number">센터 연락처를 올바르게 입력해주세요.</string>
+    <string name="wrong_phone_number">연락처를 올바르게 입력해주세요.</string>
     <string name="wrong_phone_number_warning">영수증 발송 시 문자 제목과 발송연락처로\n사용되오니 정확하게 입력해주세요.</string>
 
     <string name="cancel_receipt_send">영수증 발송을 취소하시겠습니까?</string>

@@ -1,12 +1,12 @@
 package com.tobcross.gymmanagerreceipt.ui;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity {
         SpinnerAdapter adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getResources().getStringArray(R.array.phone_first_digit_array));
         mPhoneDigistFirstNumberSp.setAdapter(adapter);
 
-        if (getDisplayDensity() > 240) {
+        if (getDisplayDensity() > 320) {
             findViewById(R.id.main_phone_tv).setVisibility(View.GONE);
         }
 
@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void showSingleLaunchWarningDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
         AlertDialog dialog = builder.setMessage(getResources().getString(R.string.single_launch_warning))
                 .setTitle(R.string.warning)
@@ -124,24 +124,26 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.main_cancel_btn)
     void showReceiptIssueCancelDialog() {
         hideSoftKeyboard();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
-        AlertDialog mAlertDialog = builder.setMessage(getResources().getString(R.string.cancel_receipt_send))
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+        final AlertDialog mAlertDialog = builder.setMessage(getResources().getString(R.string.cancel_receipt_send))
+                .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         exitActivity();
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                     }
                 })
                 .create();
+
         mAlertDialog.show();
+
     }
 
     @OnClick(R.id.main_ok_btn)
@@ -160,10 +162,10 @@ public class MainActivity extends BaseActivity {
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
         AlertDialog mAlertDialog = builder.setMessage(getResources().getString(R.string.ok_receipt_send))
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -173,7 +175,7 @@ public class MainActivity extends BaseActivity {
                         dialogInterface.dismiss();
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

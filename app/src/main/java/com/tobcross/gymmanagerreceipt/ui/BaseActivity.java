@@ -2,6 +2,7 @@ package com.tobcross.gymmanagerreceipt.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -13,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -118,12 +118,12 @@ public class BaseActivity extends AppCompatActivity {
         return toolbar;
     }
 
-    public void exitActivity(){
+    public void exitActivity() {
         hideSoftKeyboard();
         finish();
     }
 
-    public SharedPreferences getPreference(){
+    public SharedPreferences getPreference() {
         return getSharedPreferences(Constans.PREFERENCE_DEFAULT_NAME, MODE_PRIVATE);
     }
 
@@ -135,15 +135,15 @@ public class BaseActivity extends AppCompatActivity {
         Toast.makeText(mActivity, message, Toast.LENGTH_SHORT).show();
     }
 
-    public AlertDialog showAlertDialog(CharSequence message, final boolean shouldFinish){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    public AlertDialog showAlertDialog(CharSequence message, final boolean shouldFinish) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
         mAlertDialog = builder.setMessage(message)
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        if (shouldFinish){
+                        if (shouldFinish) {
                             exitActivity();
                         }
                     }
@@ -215,9 +215,10 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
-    public int getDisplayDensity(){
+    public int getDisplayDensity() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        Log.d(TAG, String.format("DPI=%d", metrics.densityDpi));
         return metrics.densityDpi;
     }
 }

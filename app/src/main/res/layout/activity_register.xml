@@ -105,15 +105,31 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/normal_item_margin"
+                    android:layout_marginLeft="@dimen/normal_item_margin"
                     android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/register_phone_digit_first_sp"
+                    <com.beardedhen.androidbootstrap.BootstrapEditText
+                        android:id="@+id/register_phone_digit_first_et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/normal_item_margin"
                         android:layout_weight="1"
-                        android:entries="@array/phone_first_digit_array" />
+                        android:gravity="center"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLength="3"
+                        android:maxLines="1"
+                        android:nextFocusRight="@+id/main_phone_digit_last_et"
+                        app:bootstrapBrand="info"
+                        app:bootstrapSize="lg"
+                        app:roundedCorners="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/normal_item_margin"
+                        android:layout_marginRight="@dimen/normal_item_margin"
+                        android:text="@string/dash"
+                        android:textSize="@dimen/samll_text_size" />
 
                     <com.beardedhen.androidbootstrap.BootstrapEditText
                         android:id="@+id/register_phone_digit_middle_et"
@@ -157,6 +173,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/register_tip_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/normal_item_margin"
@@ -168,7 +185,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_item_margin"
+                android:layout_marginTop="@dimen/normal_item_margin"
                 android:orientation="horizontal">
 
                 <com.beardedhen.androidbootstrap.BootstrapButton

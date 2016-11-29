@@ -1,22 +1,19 @@
 package com.tobcross.gymmanagerreceipt.ui;
 
+import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.tobcross.gymmanagerreceipt.Constans;
 import com.tobcross.gymmanagerreceipt.R;
-
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -26,17 +23,20 @@ public class RegisterActivity extends BaseActivity {
     @BindView(R.id.register_center_name_et)
     EditText mCenterNameEt;
 
+    @BindView(R.id.register_phone_digit_first_et)
+    EditText mPhoneDigitFirstNumberEt;
+
     @BindView(R.id.register_phone_digit_middle_et)
     EditText mPhoneDigitMiddleNumberEt;
 
     @BindView(R.id.register_phone_digit_last_et)
     EditText mPhoneDigitLastNumberEt;
 
-    @BindView(R.id.register_phone_digit_first_sp)
-    Spinner mPhoneDigistFirstNumberSp;
-
     @BindView(R.id.register_ok_btn)
     BootstrapButton mOkBtn;
+
+    @BindView(R.id.register_tip_tv)
+    TextView mTipTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,18 +54,24 @@ public class RegisterActivity extends BaseActivity {
         }
 
         if(!TextUtils.isEmpty(centerPhoneNumber)){
-            String[] firstDigitArray = getResources().getStringArray(R.array.phone_first_digit_array);
-            mPhoneDigistFirstNumberSp.setSelection(Arrays.asList(firstDigitArray).indexOf(centerPhoneNumber.split("-")[0]));
+            mPhoneDigitFirstNumberEt.setText(centerPhoneNumber.split("-")[0]);
             mPhoneDigitMiddleNumberEt.setText(centerPhoneNumber.split("-")[1]);
             mPhoneDigitLastNumberEt.setText(centerPhoneNumber.split("-")[2]);
         }
 
-        SpinnerAdapter adapter = new ArrayAdapter<>(this, R.layout.spinner_item, getResources().getStringArray(R.array.phone_first_digit_array));
-        mPhoneDigistFirstNumberSp.setAdapter(adapter);
-
-        if (getDisplayDensity() > 240){
+        if (getDisplayDensity() > 320){
             findViewById(R.id.register_phone_tv).setVisibility(View.GONE);
         }
+
+        mCenterNameEt.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if(mTipTv.getVisibility() == View.VISIBLE){
+                    mTipTv.setVisibility(View.GONE);
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -87,12 +93,18 @@ public class RegisterActivity extends BaseActivity {
     void onClickOkButton() {
         hideSoftKeyboard();
         final String centerName = mCenterNameEt.getText().toString();
-        final String firstNumber = mPhoneDigistFirstNumberSp.getSelectedItem().toString();
+        final String firstNumber = mPhoneDigitFirstNumberEt.getText().toString();
         final String middleNumber = mPhoneDigitMiddleNumberEt.getText().toString();
         final String lastNumber = mPhoneDigitLastNumberEt.getText().toString();
 
         if (TextUtils.isEmpty(centerName)) {
             showToast(R.string.wrong_center_name);
+            return;
+        }
+
+        if(TextUtils.isEmpty(firstNumber)
+                || firstNumber.length() < 2){
+            showToast(R.string.wrong_phone_number);
             return;
         }
 
@@ -104,10 +116,10 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
         AlertDialog mAlertDialog = builder.setMessage(getResources().getString(R.string.save_center_register_info))
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -125,7 +137,7 @@ public class RegisterActivity extends BaseActivity {
                         exitActivity();
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -138,17 +150,17 @@ public class RegisterActivity extends BaseActivity {
     @OnClick(R.id.register_cancel_btn)
     void onClickCancelButton() {
         hideSoftKeyboard();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, AlertDialog.THEME_HOLO_LIGHT);
 
         AlertDialog mAlertDialog = builder.setMessage(getResources().getString(R.string.center_register_cancel))
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         exitActivity();
                     }
                 })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
