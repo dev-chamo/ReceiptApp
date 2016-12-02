@@ -15,7 +15,7 @@ public class ResultData {
 
     @SerializedName("err_message")
     @Expose
-    private String err_message;
+    private String errMessage;
 
     public boolean getIsRequest() {
         return isRequest;
@@ -25,12 +25,12 @@ public class ResultData {
         isRequest = request;
     }
 
-    public String getErr_message() {
-        return err_message;
+    public String getErrMessage() {
+        return errMessage;
     }
 
-    public void setErr_message(String err_message) {
-        this.err_message = err_message;
+    public void setErrMessage(String errMessage) {
+        this.errMessage = errMessage;
     }
 
 }
