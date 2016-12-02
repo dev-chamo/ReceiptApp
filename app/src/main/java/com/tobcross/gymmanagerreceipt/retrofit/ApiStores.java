@@ -32,7 +32,7 @@ public interface ApiStores {
 
     // Text 방식
     @FormUrlEncoded
-    @POST("api//0/0/temporary/sendsms")
+    @POST("api/0/0/temporary/sendsms")
     Observable<ResultData> postReceiptContent(
             @FieldMap Map<String, String> params
     );
