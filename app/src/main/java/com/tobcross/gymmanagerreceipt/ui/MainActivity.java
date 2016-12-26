@@ -22,6 +22,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.tobcross.gymmanagerreceipt.Constans;
 import com.tobcross.gymmanagerreceipt.R;
 import com.tobcross.gymmanagerreceipt.model.ResultData;
@@ -99,6 +100,8 @@ public class MainActivity extends BaseActivity {
             mReceiptTv.setVisibility(View.GONE);
             Glide.with(this)
                     .load(imageUri)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(mReceiptIv);
             mReceiptImageUri = imageUri;
         }
